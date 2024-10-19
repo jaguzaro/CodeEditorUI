@@ -1,6 +1,6 @@
 import axios from 'axios';
 const API = axios.create({
-    baseURL: 'https://emkc.org/api/v2/piston'
+    baseURL: /*'https://emkc.org/api/v2/piston'*/ 'http://localhost:5000'
 })
 
 export const executeCode = async (language, sourceCode) =>{
@@ -13,5 +13,13 @@ export const executeCode = async (language, sourceCode) =>{
             }
         ]
     });
+    return response.data;
+}
+
+export const executeAnalyzer = async (sourceCode)=>{
+    const response = await API.post('/analyze', {
+        'data': sourceCode
+    })
+    console.log(response.data)
     return response.data;
 }

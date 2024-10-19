@@ -1,5 +1,5 @@
 import {Box, Text, Button, useToast, Icon} from "@chakra-ui/react";
-import {executeCode} from "../api.js";
+import {executeAnalyzer, executeCode} from "../api.js";
 import {useEffect, useState} from "react";
 
 const Output = ({editorRef, outputRef, getOutput}) => {
@@ -23,12 +23,14 @@ const Output = ({editorRef, outputRef, getOutput}) => {
             return;
         }
 
-        const sourceCode = editorRef.getValue(); // Obtiene el código del editor
+        const sourceCode = editorRef.getValue();
         if (!sourceCode) return;
 
         try {
             setIsLoading(true);
-            const {run: result} = await executeCode('javascript', sourceCode); // Simulación de la ejecución del código
+            //const {run: result} = await executeCode('javascript', sourceCode);
+            const {run: result} = await executeAnalyzer(sourceCode)
+            console.log(result.output, result)
             setOutput(result.output.split("\n"));
             getOutput(result.output.split("\n"));
         } catch (e) {
