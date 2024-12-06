@@ -16,7 +16,7 @@ const Output = ({editorRef, outputRef, getOutput}) => {
         if (!editorRef) {
             toast({
                 title: 'Editor not initialized',
-                description: 'The editor is not ready yet.',
+                description: 'The editor is not ready yet..',
                 status: "error",
                 duration: 6000
             });
